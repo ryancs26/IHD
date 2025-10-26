@@ -8,17 +8,17 @@
   <link rel="icon" href="/favicon.ico" />
   <style>
     :root {
-      --bg: #ffffff;          /* white background */
-      --panel: #ffffff;       /* panels on white */
-      --text: #0f172a;        /* slate-900 for body text */
-      --muted: #4b5563;       /* slate-600 for muted text */
-      --brand: #bfd730;       /* primary brand */
-      --brand-light: #d8ea72; /* lighter shade of brand */
-      --accent: #026957;      /* teal secondary */
-      --accent-light: #3fb8a7;/* lighter teal */
-      --card: #ffffff;        /* card background */
-      --border: #e5e7eb;      /* light border */
-      --focus: #bfd730;       /* focus ring in brand */
+      --bg: #ffffff;            /* site background */
+      --panel: #ffffff;
+      --text: #0f172a;          /* body text */
+      --muted: #4b5563;         /* muted text */
+      --brand: #bfd730;         /* lime accent */
+      --brand-light: #d8ea72;   /* lighter lime */
+      --accent: #026957;        /* teal primary */
+      --accent-light: #3fb8a7;  /* lighter teal */
+      --card: #ffffff;          /* card background */
+      --border: #e5e7eb;        /* light border */
+      --focus: #bfd730;         /* lime focus ring */
     }
 
     * { box-sizing: border-box; }
@@ -59,8 +59,8 @@
     .brand { display: flex; align-items: center; gap: .75rem; font-weight: 700; }
     .brand__mark {
       width: 36px; height: 36px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-light));
-      box-shadow: 0 6px 30px rgba(2,105,87,.15);
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      box-shadow: 0 6px 30px rgba(2,105,87,.25);
     }
     .brand__name { letter-spacing: .2px; }
 
@@ -71,25 +71,28 @@
 
     .cta {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
       color: #06281e; font-weight: 700; border: 0; padding: .75rem 1rem;
-      border-radius: 0.9rem; box-shadow: 0 10px 30px rgba(2,105,87,.15);
+      border-radius: 0.9rem; box-shadow: 0 10px 30px rgba(2,105,87,.25);
     }
     .cta:hover { filter: brightness(1.05); text-decoration: none; }
 
     /* Hero */
-    .hero { padding: clamp(3rem, 7vw, 6rem) 0 2rem; }
+    .hero { padding: clamp(3rem, 7vw, 6rem) 0 2rem; background:
+      linear-gradient(180deg, rgba(2,105,87,.92), rgba(2,105,87,.78)); color: #ffffff; }
+    .hero h1 { color: #ffffff; }
+    .hero .lead { color: rgba(255,255,255,.9); }
     .hero__grid {
       display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center;
     }
-    .eyebrow { color: var(--brand); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; }
+    .eyebrow { color: var(--brand); font-weight: 800; text-transform: uppercase; letter-spacing: .14em; font-size: .85rem; }
     h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: .3rem 0 1rem; }
     .lead { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); }
 
     .hero__card {
-      background: linear-gradient(180deg, rgba(191,215,48,.10), rgba(191,215,48,.04));
-      border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem;
-      box-shadow: 0 10px 30px rgba(2,105,87,.08);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18); border-radius: 1rem; padding: 1.25rem;
+      box-shadow: 0 10px 30px rgba(2,105,87,.2);
     }
 
     /* Sections */
@@ -107,16 +110,14 @@
     .badge { display: inline-block; padding: .35rem .6rem; border-radius: .6rem; background: rgba(255,255,255,.08); margin: .25rem; font-size: .9rem; }
 
     .note {
-      background: linear-gradient(180deg, rgba(191,215,48,.18), rgba(191,215,48,.07));
+      background: linear-gradient(180deg, rgba(191,215,48,.12), rgba(191,215,48,.05));
       border: 1px solid rgba(191,215,48,.45);
       color: #053020; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: 1rem;
     }
 
     .list-check { list-style: none; padding: 0; margin: 0; }
     .list-check li { padding-left: 1.6rem; position: relative; margin: .6rem 0; }
-    .list-check li::before {
-      content: "✔"; position: absolute; left: 0; top: 0; line-height: 1.2; color: var(--brand);
-    }
+    .list-check li::before { content: "✔"; position: absolute; left: 0; top: 0; line-height: 1.2; color: var(--brand); }
 
     /* Footer */
     footer { border-top: 1px solid var(--border); background: #ffffff; padding: 2rem 0; margin-top: 2rem; }
@@ -128,6 +129,7 @@
 
     /* Focus styles */
     :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: .5rem; }
+  .hero .cta { background: linear-gradient(135deg, var(--brand), var(--brand-light)); color: #06281e; }
   </style>
 </head>
 <body>
