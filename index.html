@@ -13,8 +13,9 @@
       --text: #0f172a;        /* slate-900 for body text */
       --muted: #4b5563;       /* slate-600 for muted text */
       --brand: #bfd730;       /* primary brand */
-      --brand-dark: #026957;  /* secondary brand */
-      --accent: #026957;      /* link/accent */
+      --brand-light: #d8ea72; /* lighter shade of brand */
+      --accent: #026957;      /* teal secondary */
+      --accent-light: #3fb8a7;/* lighter teal */
       --card: #ffffff;        /* card background */
       --border: #e5e7eb;      /* light border */
       --focus: #bfd730;       /* focus ring in brand */
@@ -58,8 +59,8 @@
     .brand { display: flex; align-items: center; gap: .75rem; font-weight: 700; }
     .brand__mark {
       width: 36px; height: 36px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
-      box-shadow: 0 6px 30px rgba(2,105,87,.25);
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      box-shadow: 0 6px 30px rgba(2,105,87,.15);
     }
     .brand__name { letter-spacing: .2px; }
 
@@ -70,9 +71,9 @@
 
     .cta {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
       color: #06281e; font-weight: 700; border: 0; padding: .75rem 1rem;
-      border-radius: 0.9rem; box-shadow: 0 10px 30px rgba(2,105,87,.25);
+      border-radius: 0.9rem; box-shadow: 0 10px 30px rgba(2,105,87,.15);
     }
     .cta:hover { filter: brightness(1.05); text-decoration: none; }
 
@@ -86,7 +87,7 @@
     .lead { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); }
 
     .hero__card {
-      background: linear-gradient(180deg, rgba(191,215,48,.10), rgba(2,105,87,.06));
+      background: linear-gradient(180deg, rgba(191,215,48,.10), rgba(191,215,48,.04));
       border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem;
       box-shadow: 0 10px 30px rgba(2,105,87,.08);
     }
