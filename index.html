@@ -78,10 +78,9 @@
     .cta:hover { filter: brightness(1.05); text-decoration: none; }
 
     /* Hero */
-    .hero { padding: clamp(3rem, 7vw, 6rem) 0 2rem; background:
-      linear-gradient(180deg, rgba(2,105,87,.92), rgba(2,105,87,.78)); color: #ffffff; }
-    .hero h1 { color: #ffffff; }
-    .hero .lead { color: rgba(255,255,255,.9); }
+    .hero { padding: clamp(3rem, 7vw, 6rem) 0 2rem; }
+    .hero h1 { color: inherit; }
+    .hero .lead { color: var(--muted); }
     .hero__grid {
       display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center;
     }
@@ -130,6 +129,9 @@
     /* Focus styles */
     :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: .5rem; }
   .hero .cta { background: linear-gradient(135deg, var(--brand), var(--brand-light)); color: #06281e; }
+  .hero__media { border-radius: 2rem; overflow: hidden; box-shadow: 0 12px 40px rgba(2,105,87,.18); border: 1px solid var(--border); }
+.hero__media img, .hero__media video { width: 100%; height: 100%; display: block; object-fit: cover; }
+.hero__media--wide { aspect-ratio: 16 / 9; }
   </style>
 </head>
 <body>
@@ -167,15 +169,14 @@
           </a>
         </p>
       </div>
-      <aside class="hero__card" aria-label="At a glance">
-        <ul class="list-check">
-          <li>Specialty medication script management</li>
-          <li>Pre‑arranged delivery nationwide</li>
-          <li>Validated cold‑chain handling expertise</li>
-          <li>No charges to patients beyond legislated co‑payment</li>
-          <li>Family owned & operated Australian business</li>
-        </ul>
-      </aside>
+      <figure class="hero__media hero__media--wide" aria-label="Hero media">
+        <!-- Swap to your own static image or MP4 -->
+        <!-- Example video usage:
+        <video autoplay muted loop playsinline poster="/media/hero-poster.jpg">
+          <source src="/media/hero.mp4" type="video/mp4" />
+        </video> -->
+        <img src="/media/hero-placeholder.jpg" alt="Therapeutic care visual placeholder" />
+      </figure>
     </div>
   </main>
 
