@@ -3,315 +3,644 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inservio Home — Making life easier for patients</title>
-  <meta name="description" content="Inservio Home simplifies access to specialty medicines through script management and pre‑arranged delivery, with no charges to patients beyond the legislated pharmacy co‑payment." />
+  <title>Inservio Home - Making life easier for patients</title>
+  <meta name="description" content="Inservio Home simplifies access to specialty medicines through script management and pre-arranged delivery, with no charges to patients beyond the legislated pharmacy co-payment." />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="main.css" />
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
     :root {
-      --bg: #ffffff;            /* site background */
+      --bg: #f5f7fb;
       --panel: #ffffff;
-      --text: #0f172a;          /* body text */
-      --muted: #4b5563;         /* muted text */
-      --brand: #bfd730;         /* lime accent */
-      --brand-light: #d8ea72;   /* lighter lime */
-      --accent: #026957;        /* teal primary */
-      --accent-light: #3fb8a7;  /* lighter teal */
-      --card: #ffffff;          /* card background */
-      --border: #e5e7eb;        /* light border */
-      --focus: #bfd730;         /* lime focus ring */
+      --ink: #0f1e37;
+      --muted: #57657b;
+      --accent: #118d86;
+      --accent-2: #7bcf6b;
+      --border: #e4e8f0;
+      --shadow: 0 20px 80px rgba(15, 30, 55, 0.08);
+      --radius: 16px;
+      --focus: #ffd166;
     }
 
     * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.6;
-      color: var(--text);
-      background: var(--bg);
-    }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: 'Manrope', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       line-height: 1.6;
-      color: var(--text);
-      background: radial-gradient(1200px 600px at 10% -10%, #1b2650 0%, rgba(15,23,42,0) 60%),
-                  radial-gradient(1000px 500px at 110% -20%, #0f3b6e 0%, rgba(15,23,42,0) 60%),
-                  var(--bg);
+      color: var(--ink);
+      background:
+        radial-gradient(900px 600px at 15% 5%, #e7f3ff 0%, rgba(231,243,255,0) 60%),
+        radial-gradient(1200px 700px at 90% 0%, #e4fff7 0%, rgba(228,255,247,0) 60%),
+        var(--bg);
     }
 
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Layout */
-    .container { width: min(1200px, 92vw); margin: 0 auto; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
 
-    /* Header */
     header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.85);
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(245, 247, 251, 0.9);
       border-bottom: 1px solid var(--border);
     }
     .nav {
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 1rem 0.5rem;
+      padding: 1rem 0;
     }
-    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 700; }
+    .brand { display: flex; align-items: center; gap: .65rem; font-weight: 700; color: var(--ink); }
     .brand__mark {
-      width: 36px; height: 36px; border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      box-shadow: 0 6px 30px rgba(2,105,87,.25);
+      display: inline-flex; align-items: center;
+      padding: 4px 0; box-shadow: 0 8px 30px rgba(17, 141, 134, 0.12);
     }
-    .brand__name { letter-spacing: .2px; }
+    .brand__mark img { height: 54px; width: auto; display: block; }
+    .brand__text { font-size: 1.05rem; letter-spacing: .01em; color: var(--ink); }
 
-    nav ul { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }
-    nav a { color: var(--text); opacity: .9; padding: .5rem .75rem; border-radius: .6rem; }
-    
-    nav a:hover, nav a:focus { background: rgba(0,0,0,.05); outline: none; }
+    nav ul { list-style: none; display: flex; gap: .5rem; padding: 0; margin: 0; }
+    nav a {
+      color: var(--ink); opacity: .85; padding: .55rem .85rem; border-radius: 12px; font-weight: 600;
+      transition: background .2s ease, transform .2s ease;
+    }
+    nav a:hover, nav a:focus { background: rgba(17, 141, 134, 0.08); transform: translateY(-1px); }
 
-    .cta {
+    .button {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: #06281e; font-weight: 700; border: 0; padding: .75rem 1rem;
-      border-radius: 0.9rem; box-shadow: 0 10px 30px rgba(2,105,87,.25);
+      padding: .8rem 1.1rem; border-radius: 12px; border: 1px solid transparent;
+      font-weight: 700; letter-spacing: .01em; cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), #0aa57c);
+      color: #ffffff; box-shadow: 0 14px 36px rgba(17,141,134,0.28);
     }
-    .cta:hover { filter: brightness(1.05); text-decoration: none; }
+    .button:hover { filter: brightness(1.05); text-decoration: none; transform: translateY(-1px); box-shadow: 0 18px 38px rgba(17,141,134,0.32); }
+    .button:active { transform: translateY(0); box-shadow: 0 12px 26px rgba(17,141,134,0.24); }
 
-    /* Hero */
-    .hero { padding: clamp(3rem, 7vw, 6rem) 0 2rem; }
-    .hero h1 { color: inherit; }
-    .hero .lead { color: var(--muted); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    main { padding-bottom: 3rem; }
+
+    section { padding: 3.5rem 0; }
+    h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.1; margin: .25rem 0 1rem; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 0 0 .4rem; }
+    h3 { margin: 0 0 .4rem; font-size: 1.15rem; }
+    p { margin: .5rem 0; }
+    .lead { font-size: 1.1rem; color: var(--muted); max-width: 720px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .18em; color: var(--accent); font-size: .85rem; font-weight: 800; }
+
+    .hero {
+      position: relative;
+      padding: clamp(4rem, 10vw, 6rem) 0;
+      color: #fff;
+      min-height: 70vh;
+      background:
+        linear-gradient(90deg, rgba(17,141,134,0.62) 0%, rgba(17,141,134,0.45) 25%, rgba(17,141,134,0.18) 55%, rgba(17,141,134,0) 80%),
+        url("https://raw.githubusercontent.com/ryancs26/IHD/main/delivery.jpg") center -80px/cover no-repeat;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0));
+      pointer-events: none;
+    }
     .hero__grid {
-      display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: center;
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr;
+      gap: 1.5rem; max-width: 720px;
+      justify-items: flex-start;
+      margin-left: calc(clamp(2rem, 8vw, 7rem) + 60px);
+      margin-top: calc(clamp(4rem, 14vh, 8rem) - 30px);
     }
-    .eyebrow { color: var(--brand); font-weight: 800; text-transform: uppercase; letter-spacing: .14em; font-size: .85rem; }
-    h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; margin: .3rem 0 1rem; }
-    .lead { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); }
-
-    .hero__card {
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.18); border-radius: 1rem; padding: 1.25rem;
-      box-shadow: 0 10px 30px rgba(2,105,87,.2);
+    .hero__copy {
+      background: none;
+      border: none;
+      padding: clamp(0.6rem, 2vw, 1rem) 0;
+      max-width: 760px;
+      text-align: left;
     }
+    .hero__copy h1 { margin: 0 0 .8rem; color: #fff; text-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .hero__copy p { color: rgba(255,255,255,0.92); }
 
-    /* Sections */
-    section { padding: 3rem 0; }
-    section .section__head { margin-bottom: 1.25rem; }
-    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 0 0 .5rem; }
-    p { margin: .6rem 0; }
-
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .section__head { margin-bottom: 1.2rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
     @media (max-width: 900px) { .hero__grid, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.25rem; }
-    .card h3 { margin-top: 0; font-size: 1.15rem; }
-    .badge { display: inline-block; padding: .35rem .6rem; border-radius: .6rem; background: rgba(255,255,255,.08); margin: .25rem; font-size: .9rem; }
-
-    .note {
-      background: linear-gradient(180deg, rgba(191,215,48,.12), rgba(191,215,48,.05));
-      border: 1px solid rgba(191,215,48,.45);
-      color: #053020; border-radius: 1rem; padding: 1rem 1.25rem; margin-top: 1rem;
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem;
+      box-shadow: 0 10px 40px rgba(15, 30, 55, 0.05);
+    }
+    .card__icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(17, 141, 134, 0.12); display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; color: var(--accent);
+      margin-bottom: .75rem;
+    }
+    .card__icon--script {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border: 1px solid rgba(17,141,134,0.3);
+      color: #ffffff;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .script-stack { display: inline-flex; flex-direction: column; align-items: flex-start; gap: .4rem; }
+    .script-card { animation: scriptCard 3.5s ease-in-out infinite; transform-origin: center; }
+    /* Hub animation for the Coordinate step */
+    #how .card:nth-child(1) .card__icon {
+      width: 136px; height: 136px; border-radius: 30px;
+      background: linear-gradient(135deg, rgba(17,141,134,0.18), rgba(123,207,107,0.22));
+      border: 1px solid rgba(17,141,134,0.3); box-shadow: none;
+      color: #0f1e37; padding: 20px;
+      overflow: visible;
+    }
+    #how .card:nth-child(1) .card__icon svg {
+      width: 100%; height: 100%;
+      filter: none;
+      overflow: visible;
     }
 
-    .list-check { list-style: none; padding: 0; margin: 0; }
-    .list-check li { padding-left: 1.6rem; position: relative; margin: .6rem 0; }
-    .list-check li::before { content: "✔"; position: absolute; left: 0; top: 0; line-height: 1.2; color: var(--brand); }
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag {
+      display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .75rem; border-radius: 10px;
+      background: #f0f4fa; color: var(--ink); font-weight: 600; border: 1px solid #e7edf5;
+      position: relative; animation: float 6s ease-in-out infinite;
+    }
+    .tag .icon {
+      width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center;
+    }
+    .tag[data-type="pah"] .icon { animation: pulse 2.2s ease-in-out infinite; }
+    .tag[data-type="ild"] .icon svg { animation: drift 3.4s ease-in-out infinite; }
+    .tag[data-type="onco"] .icon svg { animation: sway 3s ease-in-out infinite; }
+    .tag[data-type="sma"] .icon svg { animation: shimmer 2.8s ease-in-out infinite; }
+    .tag[data-type="hiv"] .icon svg { animation: pulse 2.6s ease-in-out infinite; }
+    .tag[data-type="ms"] .icon svg { animation: dna 3.2s ease-in-out infinite; transform-origin: center; }
+    .tag[data-type="resp"] .icon svg { animation: breathe 3.6s ease-in-out infinite; transform-origin: center; }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); background: #ffffff; padding: 2rem 0; margin-top: 2rem; }
+    .tags .tag:nth-child(1) { animation-delay: 0s; }
+    .tags .tag:nth-child(2) { animation-delay: .4s; }
+    .tags .tag:nth-child(3) { animation-delay: .8s; }
+    .tags .tag:nth-child(4) { animation-delay: 1.2s; }
+    .tags .tag:nth-child(5) { animation-delay: 1.6s; }
+    .tags .tag:nth-child(6) { animation-delay: 2s; }
+    .tags .tag:nth-child(7) { animation-delay: 2.4s; }
+    .tags .tag:nth-child(8) { animation-delay: 2.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+    @keyframes drift {
+      0%,100% { transform: translate(0,0); }
+      50% { transform: translate(2px,-3px) scale(1.05); }
+    }
+    @keyframes sway {
+      0%,100% { transform: rotate(0deg); }
+      50% { transform: rotate(-5deg); }
+    }
+    @keyframes shimmer {
+      0%,100% { filter: drop-shadow(0 0 0 rgba(124,77,255,0)); }
+      50% { filter: drop-shadow(0 0 6px rgba(124,77,255,0.35)); }
+    }
+    @keyframes dna {
+      0%,100% { transform: rotate(0deg); }
+      50% { transform: rotate(6deg); }
+    }
+    @keyframes breathe {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    @keyframes poleSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes poleSpinPulse {
+      0% { transform: rotate(0deg) scale(0.9); }
+      50% { transform: rotate(180deg) scale(1.06); }
+      100% { transform: rotate(360deg) scale(0.9); }
+    }
+    @keyframes sheetOut {
+      0%, 25% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
+      35% { opacity: 0; transform: translateX(-16px) rotate(-4deg) scale(0.94); }
+      100% { opacity: 0; transform: translateX(-16px) rotate(-4deg) scale(0.94); }
+    }
+    @keyframes calIn {
+      0%, 25% { opacity: 0; transform: translateX(12px) rotate(4deg) scale(0.94); }
+      45% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
+      65% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
+      80%, 100% { opacity: 0; transform: translateX(-12px) rotate(-4deg) scale(0.94); }
+    }
+    @keyframes calTick {
+      0%, 74% { opacity: 0; transform: translate(-6px, 6px) scale(0.6); stroke-dashoffset: 1; }
+      82% { opacity: 1; transform: translate(0,0) scale(1.05); stroke-dashoffset: 0.2; }
+      90% { opacity: 1; transform: translate(0,0) scale(1); stroke-dashoffset: 0; }
+      100% { opacity: 0; transform: translate(-16px, 4px) scale(0.95); stroke-dashoffset: 0; }
+    }
+    @keyframes vanSlide {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(8px); }
+    }
+    @keyframes coldPulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    @keyframes slideRight {
+      0% { transform: translateX(-4px); opacity: 0; }
+      15% { opacity: 1; }
+      60% { transform: translateX(6px); opacity: 1; }
+      100% { transform: translateX(6px); opacity: 0; }
+    }
+    @keyframes scriptCard {
+      0% { opacity: 1; transform: translateX(0); }
+      70% { opacity: 1; transform: translateX(0); }
+      90% { opacity: 0; transform: translateX(14px); }
+      100% { opacity: 0; transform: translateX(0); }
+    }
+
+    /* Align headers: icon left, text right */
+    .card--coordinate .card__header,
+    .card--manage .card__header,
+    .card--deliver .card__header {
+      display: flex; align-items: center; justify-content: flex-start; gap: 1rem;
+      margin-bottom: .35rem;
+    }
+    .card--coordinate .card__icon,
+    .card--manage .card__icon,
+    .card--deliver .card__icon {
+      margin: 0;
+      align-self: center;
+    }
+    .card--coordinate h3,
+    .card--manage h3,
+    .card--deliver h3 { margin: 0; }
+    .card--manage .card__icon {
+      width: 136px; height: 136px; border-radius: 30px;
+      background: linear-gradient(135deg, rgba(17,141,134,0.18), rgba(123,207,107,0.22));
+      border: 1px solid rgba(17,141,134,0.3);
+      color: #0f1e37;
+      padding: 20px;
+    }
+    .card--manage .card__icon svg { width: 100%; height: 100%; }
+    .card--manage .sheet { animation: sheetOut 3.2s ease-in-out infinite; transform-origin: center; }
+    .card--manage .calendar { animation: calIn 3.2s ease-in-out infinite; transform-origin: center; }
+    .card--manage .cal-check {
+      animation: calTick 3.2s ease-in-out infinite;
+      transform-origin: center;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    /* Deliver animation (van + cold chain) */
+    .card--deliver .card__icon {
+      width: 136px; height: 136px; border-radius: 30px;
+      background: linear-gradient(135deg, rgba(17,141,134,0.18), rgba(123,207,107,0.22));
+      border: 1px solid rgba(17,141,134,0.3);
+      color: #0f1e37; padding: 20px;
+    }
+    .card--deliver .card__icon svg { width: 100%; height: 100%; }
+    .card--deliver .van { animation: vanSlide 3.4s ease-in-out infinite; transform-origin: center; }
+    .card--deliver .cold { animation: coldPulse 2.6s ease-in-out infinite; transform-origin: center; }
+    .card--manage .cal-check { animation: calTick 3.2s ease-in-out infinite; transform-origin: center; }
+
+
+    .callout {
+      background: linear-gradient(135deg, rgba(17, 141, 134, 0.12), rgba(123, 207, 107, 0.12));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: 0 10px 40px rgba(15, 30, 55, 0.05);
+    }
+
+    footer { border-top: 1px solid var(--border); background: #ffffff; padding: 1.8rem 0; margin-top: 2rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; align-items: center; }
-    .legal { color: var(--muted); font-size: .9rem; }
+    .legal { color: var(--muted); font-size: .95rem; }
     .links { text-align: right; }
-    .links a { margin-left: 1rem; color: var(--muted); }
-    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr; } .links { text-align: left; margin-top: .5rem; } }
+    .links a { margin-left: 1rem; color: var(--muted); font-weight: 600; }
+    @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; } .links { text-align: left; } }
 
-    /* Focus styles */
-    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: .5rem; }
-  .hero .cta { background: linear-gradient(135deg, var(--brand), var(--brand-light)); color: #06281e; }
-  .hero__media { border-radius: 2rem; overflow: hidden; box-shadow: 0 12px 40px rgba(2,105,87,.18); border: 1px solid var(--border); }
-.hero__media img, .hero__media video { width: 100%; height: 100%; display: block; object-fit: cover; }
-.hero__media--wide { aspect-ratio: 16 / 9; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 10px; }
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="container nav" role="navigation" aria-label="Primary">
-      <a class="brand" href="#home">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__name">Inservio Home</span>
+      <a class="brand" href="#home" aria-label="Inservio Home">
+        <span class="brand__mark">
+          <img src="https://brown68555c4t.netlify.app/IHDlogo.png" alt="Inservio Home" />
+        </span>
+        <span class="brand__text">Inservio Home</span>
       </a>
       <nav>
         <ul>
-          <li><a href="#mission">Mission</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#areas">Therapeutic Areas</a></li>
-          <li><a href="#how">How We Help</a></li>
-          <li><a href="#delivery">Delivery & Cold‑Chain</a></li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Patients</a></li>
+          <li><a href="#how">Clinic</a></li>
+          <li><a href="#delivery">Pharma</a></li>
+          <li><a href="#areas">Therapy Areas</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#contact" class="cta">Get in touch</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <main id="home" class="hero">
-    <div class="container hero__grid">
-      <div>
-        <div class="eyebrow">Welcome to Inservio Home</div>
-        <h1>Our mission is to make life easier for patients.</h1>
-        <p class="lead">We take the confusion out of specialty medicines and give control back to patients. Our team manages prescriptions and coordinates pre‑arranged deliveries so therapy can stay on track.</p>
-        <p style="margin-top:1rem;">
-          <a class="cta" href="#services" aria-label="Explore Inservio Home services">
-            Explore services →
-          </a>
-        </p>
-      </div>
-      <figure class="hero__media hero__media--wide" aria-label="Hero media">
-        <!-- Swap to your own static image or MP4 -->
-        <!-- Example video usage:
-        <video autoplay muted loop playsinline poster="/media/hero-poster.jpg">
-          <source src="/media/hero.mp4" type="video/mp4" />
-        </video> -->
-        <img src="/media/hero-placeholder.jpg" alt="Therapeutic care visual placeholder" />
-      </figure>
-    </div>
-  </main>
-
-  <!-- Mission -->
-  <section id="mission">
-    <div class="container">
-      <div class="section__head">
-        <h2>Putting patients first</h2>
-        <p class="lead">Inservio Home’s core services include specialty medication prescription management and specialty medicine delivery at a pre‑arranged time.</p>
-      </div>
-      <div class="note" role="note" aria-label="Patient fees">
-        There are no charges to patients for our services. The only fee patients pay is the legislated pharmacy co‑payment.
-      </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services">
-    <div class="container">
-      <div class="section__head">
-        <h2>Core Services</h2>
-        <p class="lead">Access to specialty medicines can be complex and challenging. Our services are designed to support optimal outcomes and reduce patient burden.</p>
-      </div>
-      <div class="grid-3" role="list">
-        <article class="card" role="listitem">
-          <h3>Script Management</h3>
-          <p>Helping patients manage and obtain their specialty medication scripts across a wide range of therapeutic areas, ensuring continuity of treatment.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Working with Specialty Pharmacies</h3>
-          <p>Supplying your script to a specialty pharmacy committed to carrying your medication and collecting the medication on your behalf.</p>
-        </article>
-        <article class="card" role="listitem">
-          <h3>Collection & Delivery Service</h3>
-          <p>Delivering to patients at a pre‑arranged time and place. We have extensive expertise in ambient and validated cold‑chain medicine deliveries, ensuring correct temperature and handling throughout the journey.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Therapeutic Areas -->
-  <section id="areas">
-    <div class="container">
-      <div class="section__head">
-        <h2>Therapeutic Areas</h2>
-        <p class="lead">We work across a variety of therapeutic areas to support patients and care teams.</p>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <p>
-            <span class="badge">Immunological diseases</span>
-            <span class="badge">Pulmonary arterial hypertension</span>
-            <span class="badge">Interstitial lung disease</span>
-            <span class="badge">Oncology</span>
-            <span class="badge">Spinal muscular atrophy</span>
-            <span class="badge">HIV</span>
-            <span class="badge">Multiple sclerosis</span>
-            <span class="badge">Respiratory diseases</span>
-          </p>
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0;">Outcomes‑focused</h3>
-          <p>Inservio Home services are designed to help patients get the best treatment outcomes by coordinating the many moving parts around specialty therapy.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How We Help / Primary Services -->
-  <section id="how">
-    <div class="container">
-      <div class="section__head">
-        <h2>How We Help</h2>
-        <p class="lead">From scripts to safe delivery, we streamline the journey end‑to‑end.</p>
-      </div>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Coordinate</h3>
-          <p>We liaise with prescribers and specialty pharmacies to remove friction and ensure continuity of therapy.</p>
-        </div>
-        <div class="card">
-          <h3>Manage</h3>
-          <p>We manage repeat scripts and timing to align with clinical advice and patient needs.</p>
-        </div>
-        <div class="card">
-          <h3>Deliver</h3>
-          <p>We deliver on time, with validated cold‑chain where required and clear handover at the arranged place.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Delivery / Cold Chain -->
-  <section id="delivery">
-    <div class="container">
-      <div class="section__head">
-        <h2>Delivery & Cold‑Chain</h2>
-        <p class="lead">Validated cold‑chain packaging and handling to protect medicine integrity throughout the journey.</p>
-      </div>
-      <div class="card">
-        <p id="cold-chain">Read about our cold‑chain packaging <a href="/cold-chain-packaging" aria-label="Read about our cold-chain packaging">here</a>.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- About / Contact -->
-  <section id="about">
-    <div class="container">
-      <div class="grid-2">
-        <div>
-          <h2>About Inservio Home</h2>
-          <p>Inservio Home is a family owned and operated Australian business. We are committed to supporting patients, families, clinicians, and pharmacies with an accessible, patient‑centred service.</p>
-        </div>
-        <aside id="contact" class="card" aria-label="Contact">
-          <h3 style="margin-top:0;">Get in touch</h3>
-          <p>If you’d like to learn more about our services or discuss how we can help, please reach out.</p>
-          <p>
-            <a class="cta" href="mailto:info@example.com?subject=Enquiry%20about%20Inservio%20Home" aria-label="Email Inservio Home">
-              Email us
+  <main id="home">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow" style="color:#fff;">Welcome to Inservio Home</p>
+          <h1>Our mission is to make life easier for patients.</h1>
+          <p class="lead" style="color:rgba(255,255,255,0.92); max-width: 520px;">We manage prescriptions and pre-arranged deliveries so specialty therapy stays on track—on time and safely handled.</p>
+          <p style="margin-top:1rem;">
+            <a class="button" href="#services" aria-label="Explore Inservio Home services">
+              Explore services
             </a>
           </p>
-          <p class="muted" style="color:var(--muted); font-size:.9rem;">(Replace with your preferred contact details.)</p>
-        </aside>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
+    <section id="mission">
+      <div class="container">
+        <div class="section__head">
+          <h2>Putting patients first</h2>
+          <p class="lead">Inservio Home's core services include specialty medication prescription management and specialty medicine delivery at a pre-arranged time.</p>
+        </div>
+        <div class="callout" role="note" aria-label="Patient fees">
+          There are no charges to patients for our services. The only fee patients pay is the legislated pharmacy co-payment.
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section__head">
+          <h2>Core Services</h2>
+          <p class="lead">Access to specialty medicines can be complex and challenging. Our services are designed to support optimal outcomes and reduce patient burden.</p>
+        </div>
+        <div class="grid-3" role="list">
+          <article class="card" role="listitem">
+            <div class="script-stack" aria-hidden="true">
+              <div class="card__icon" style="width: 48px; height: 32px; border-radius: 12px; background: rgba(17,141,134,0.15); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; font-weight: 800;">
+                01
+              </div>
+              <div class="card__icon card__icon--script">
+                <svg viewBox="0 0 64 64" focusable="false" class="script-card">
+                  <defs>
+                    <linearGradient id="scriptGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent)"/>
+                      <stop offset="100%" stop-color="var(--accent-2)"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="8" y="6" width="40" height="52" rx="10" fill="url(#scriptGrad)" stroke="#ffffff" stroke-width="2" />
+                  <rect x="14" y="26" width="28" height="3" rx="1.5" fill="#ffffff"/>
+                  <rect x="14" y="32" width="22" height="3" rx="1.5" fill="#ffffff"/>
+                  <rect x="14" y="38" width="16" height="3" rx="1.5" fill="#ffffff"/>
+                </svg>
+              </div>
+            </div>
+            <h3>Script Management</h3>
+            <p>Helping patients manage and obtain their specialty medication scripts across a wide range of therapeutic areas, ensuring continuity of treatment.</p>
+          </article>
+          <article class="card" role="listitem">
+            <div class="card__icon">02</div>
+            <h3>Working with Specialty Pharmacies</h3>
+            <p>Supplying your script to a specialty pharmacy committed to carrying your medication and collecting the medication on your behalf.</p>
+          </article>
+          <article class="card" role="listitem">
+            <div class="card__icon">03</div>
+            <h3>Collection & Delivery Service</h3>
+            <p>Delivering to patients at a pre-arranged time and place. We have extensive expertise in ambient and validated cold-chain medicine deliveries, ensuring correct temperature and handling throughout the journey.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas">
+      <div class="container">
+        <div class="section__head">
+          <h2>Therapeutic Areas</h2>
+          <p class="lead">We work across a variety of therapeutic areas to support patients and care teams.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="tags">
+              <span class="tag" data-type="immune"><span class="icon">🛡️</span>Immunological diseases</span>
+              <span class="tag" data-type="pah"><span class="icon">❤️</span>Pulmonary arterial hypertension</span>
+              <span class="tag" data-type="ild"><span class="icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <circle cx="8" cy="10" r="4" fill="#9dd6c8"/>
+                  <circle cx="15" cy="14" r="4" fill="#74b8ff"/>
+                  <circle cx="10" cy="14" r="3.2" fill="#b8e4ff" opacity="0.9"/>
+                </svg>
+              </span>Interstitial lung disease</span>
+              <span class="tag" data-type="onco"><span class="icon">
+                <svg viewBox="0 0 190.32 255.96" width="22" height="22" aria-hidden="true">
+                  <path d="M153.33,246.57l-54.5-79c-1.3-.33-1.74.83-2.47,1.51-6.38,6-18.27,22.31-23.99,30.01-11.65,15.69-22.56,32.34-30.04,50.47l-2.22-1.29-16.57-37.44c10.1-29.11,31.53-53.25,50.71-76.91-18.59-26.68-31.95-53.43-15.44-85.4,17.37-33.64,65.19-30.74,79.72,4.36,12.99,31.39,1.09,56.66-16.02,83.03,13.91,17.83,29.08,35.04,40.01,54.98,1.69,3.08,8.26,15.02,8.67,17.43.19,1.15.26,2.18-.27,3.25l-17.58,34.99ZM99.22,102.43c5.17-8.8,11.89-16.78,16.65-25.83,1.62-3.09,7.58-14.53,6.02-17.03-3.12-4.98-22.56-5.45-28.08-5.03-2.87.21-19.47,3.84-20.33,5.17-.54.84-.16,3.04.1,4.14,1.34,5.68,17.52,33.26,21.75,37.26,1.18,1.12,2.12,2.04,3.89,1.33Z" fill="#f5a524"/>
+                </svg>
+              </span>Oncology</span>
+              <span class="tag" data-type="sma"><span class="icon">
+                <svg viewBox="0 0 190.32 255.96" width="22" height="22" aria-hidden="true">
+                  <path d="M153.33,246.57l-54.5-79c-1.3-.33-1.74.83-2.47,1.51-6.38,6-18.27,22.31-23.99,30.01-11.65,15.69-22.56,32.34-30.04,50.47l-2.22-1.29-16.57-37.44c10.1-29.11,31.53-53.25,50.71-76.91-18.59-26.68-31.95-53.43-15.44-85.4,17.37-33.64,65.19-30.74,79.72,4.36,12.99,31.39,1.09,56.66-16.02,83.03,13.91,17.83,29.08,35.04,40.01,54.98,1.69,3.08,8.26,15.02,8.67,17.43.19,1.15.26,2.18-.27,3.25l-17.58,34.99ZM99.22,102.43c5.17-8.8,11.89-16.78,16.65-25.83,1.62-3.09,7.58-14.53,6.02-17.03-3.12-4.98-22.56-5.45-28.08-5.03-2.87.21-19.47,3.84-20.33,5.17-.54.84-.16,3.04.1,4.14,1.34,5.68,17.52,33.26,21.75,37.26,1.18,1.12,2.12,2.04,3.89,1.33Z" fill="#f28c8c"/>
+                </svg>
+              </span>Spinal muscular atrophy</span>
+              <span class="tag" data-type="hiv"><span class="icon">
+                <svg viewBox="0 0 190.32 255.96" width="22" height="22" aria-hidden="true">
+                  <path d="M153.33,246.57l-54.5-79c-1.3-.33-1.74.83-2.47,1.51-6.38,6-18.27,22.31-23.99,30.01-11.65,15.69-22.56,32.34-30.04,50.47l-2.22-1.29-16.57-37.44c10.1-29.11,31.53-53.25,50.71-76.91-18.59-26.68-31.95-53.43-15.44-85.4,17.37-33.64,65.19-30.74,79.72,4.36,12.99,31.39,1.09,56.66-16.02,83.03,13.91,17.83,29.08,35.04,40.01,54.98,1.69,3.08,8.26,15.02,8.67,17.43.19,1.15.26,2.18-.27,3.25l-17.58,34.99ZM99.22,102.43c5.17-8.8,11.89-16.78,16.65-25.83,1.62-3.09,7.58-14.53,6.02-17.03-3.12-4.98-22.56-5.45-28.08-5.03-2.87.21-19.47,3.84-20.33,5.17-.54.84-.16,3.04.1,4.14,1.34,5.68,17.52,33.26,21.75,37.26,1.18,1.12,2.12,2.04,3.89,1.33Z" fill="#d32f2f"/>
+                </svg>
+              </span>HIV</span>
+              <span class="tag" data-type="ms"><span class="icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <path d="M6 4c5 0 6 16 12 16" stroke="#c687ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <path d="M12 4c5 0 6 16 12 16" stroke="#8a4ccf" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+              </span>Multiple sclerosis</span>
+              <span class="tag" data-type="resp"><span class="icon">
+                <svg viewBox="-20 -5 230 210" width="22" height="22" aria-hidden="true">
+                  <path d="M95.27.26c2.93.83 1.08 4.95 1.05 6.82-.3 17.69-.33 35.6.9 53.21 3.84 3.84 8.08 7.28 11.75 11.31 3.29 3.61 13.06 15.14 14.91 18.96 2.6 5.37 2.23 14.36 2.01 20.31-.07 1.81-2.92 10.12 1.69 8.94 2.34-.6 3.3-10.8 3.39-13.22s-.07-4.52-.75-6.87c.96-.95 8.86 7.99 10.08 9.01 3.06 2.57 13.16 9.4 16.92 9 1.15-.12 1.94-.96 2.5-1.89.32-1.87-9.7-5.78-12.01-7.32-1.03-.69-6.97-4.71-5.96-5.93 6.13 1.65 13.16.66 19.27-.89.98-.81.83-3.92-.3-4.19-8.72 1.56-16.76 1.68-25.45-.33l-17.31-21.96h14.05c4.09 0 6.75.97 10.4 3.29 2.92 1.85 8.21 9.65 9.89 3.56-2.34-4.13-6.7-7.7-11.28-9.02-1.47-2.03 12.29-8 6.82-12.23-1.64-.49-6.93 5.51-9.05 6.78-7.65 4.58-16.71 3.4-25.15 2.21l-12.16-11.64c-.01-7.84 3.07-33.75 12.54-35.51 14.62-2.71 30.94 16.37 38.38 27.12 16.42 23.69 28.59 58.47 23.57 87.43-1.63 9.37-3.94 18.76-15.51 15.48-10.31-2.93-16.07-9.44-28.66-11.69-5.66-1.01-14.11-.2-18.66-4.76-3.7-3.72-6.56-16.79-7.68-22.23-1.67-8.08-3.18-16.95-3.02-25.08 1.7.93 5.42 5.25 7.11 4.93 1.09-.21 2.13-1.82 1.83-2.99s-16.36-14.57-18.31-15.62c-1.42-.77-2.59-1.47-4.31-1.47-6.07.01-17.25 12.83-22.62 16.34-.53 1.59.54 3.63 2.31 3.75 2.19-.34 4.66-5.26 6.99-4.57-2.63 11.74-3.08 38.09-11.51 46.86-5.01 5.21-19.87 4.44-27.57 7.02-10.09 3.39-26.23 19.58-32.83 2.87C-9.95 111.8 17.1 43.11 49.29 25.62c23.48-12.75 24.67 15.92 26.77 31.78l-12.15 12.38c-9.69 1.23-19.02 2.66-27.31-3.66-1.75-1.34-5.68-6.82-7.92-5.27-3.77 2.62 6.15 9.54 7.84 11.1-3.01 2.63-8.64 5.31-10.84 8.61-.93 1.4-.98 2.12.35 3.33 2.57 2.08 4.64-2.23 6.55-3.64 2.31-1.72 8.3-5.5 10.99-5.66 1.09-.07 1.75.6 1.97.6h13.33l-16.73 22.18c-4.21.11-9.08 1.67-13.18 1.67-2.05 0-17.11-4-13.01 2.13.3.44 5.96 2.12 6.52 2.12h12.25c.3 0 1.26-1.86 1.08.35-3.01 2.22-5.83 4.89-9.14 6.72-2.25 1.24-11.03 3.19-8.56 6.65 2.2 3.1 13.38-4.23 15.77-5.93 4.72-3.36 8.37-7.68 12.74-11.4v12.61c0 2.17 3.12 11.04 5.41 6.11.99-2.12-.91-7.73-1.07-10.44-.26-4.15.28-13.01 2-16.72 1.84-3.95 13.6-18.19 17.08-21.83 3.19-3.34 7.13-5.8 10.32-9.13 1.01-17.18 1.26-34.54.89-51.78-.03-1.51-1.93-8.26 1.05-8.26s10.9-.59 12.97 0Z" fill="#0e439c"/>
+                </svg>
+              </span>Respiratory diseases</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0;">Outcomes-focused</h3>
+            <p>Inservio Home services are designed to help patients get the best treatment outcomes by coordinating the many moving parts around specialty therapy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section__head">
+          <h2>How We Help</h2>
+          <p class="lead">From scripts to safe delivery, we streamline the journey end-to-end.</p>
+        </div>
+        <div class="grid-3">
+          <div class="card card--coordinate">
+            <div class="card__header">
+              <div class="card__icon">
+                <svg viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/>
+                      <stop offset="100%" stop-color="var(--accent-2)" stop-opacity="1"/>
+                    </linearGradient>
+                    <clipPath id="hubClip">
+                      <circle cx="40" cy="40" r="26"/>
+                    </clipPath>
+                  </defs>
+                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- poles behind -->
+                    <g class="hub-poles" stroke="var(--accent)" stroke-width="2.4" style="transform-origin: 40px 40px; animation: poleSpinPulse 6s linear infinite;">
+                      <line x1="25" y1="25" x2="14" y2="14"/>
+                      <line x1="55" y1="25" x2="66" y2="14"/>
+                      <line x1="25" y1="55" x2="14" y2="66"/>
+                      <line x1="55" y1="55" x2="66" y2="66"/>
+                      <circle cx="12" cy="12" r="4" fill="url(#hubGrad)" stroke="rgba(15,30,55,0.18)" stroke-width="1.2"/>
+                      <circle cx="68" cy="12" r="4" fill="url(#hubGrad)" stroke="rgba(15,30,55,0.18)" stroke-width="1.2"/>
+                      <circle cx="12" cy="68" r="4" fill="url(#hubGrad)" stroke="rgba(15,30,55,0.18)" stroke-width="1.2"/>
+                      <circle cx="68" cy="68" r="4" fill="url(#hubGrad)" stroke="rgba(15,30,55,0.18)" stroke-width="1.2"/>
+                    </g>
+                    <circle cx="40" cy="40" r="26" fill="url(#hubGrad)"/>
+                    <g fill="#ffffff" stroke="none" clip-path="url(#hubClip)">
+                      <circle cx="40" cy="28" r="7.5"/>
+                      <path d="M31 42h18c2.8 0 5 2.2 5 5v10.5c0 2.8-2.2 5-5 5H31c-2.8 0-5-2.2-5-5V47c0-2.8 2.2-5 5-5Z" />
+                    </g>
+                  </g>
+                  <title>Coordinate</title>
+                </svg>
+              </div>
+              <h3>1. Coordinate</h3>
+            </div>
+            <p>We liaise with prescribers and specialty pharmacies to remove friction and ensure continuity of therapy.</p>
+          </div>
+          <div class="card card--manage">
+            <div class="card__header">
+              <div class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 72 72" focusable="false">
+                  <defs>
+                    <linearGradient id="manageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent)" />
+                      <stop offset="100%" stop-color="var(--accent-2)" />
+                    </linearGradient>
+                  </defs>
+                  <g fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="sheet">
+                      <rect x="12" y="14" width="30" height="40" rx="6" fill="url(#manageGrad)" opacity="0.9" stroke="none"/>
+                      <path d="M12 22h30" />
+                      <path d="M16 18v-4h8" />
+                      <path d="M16 32h22M16 38h18M16 44h14" stroke="#ffffff"/>
+                    </g>
+                    <g class="calendar">
+                      <rect x="26" y="20" width="26" height="30" rx="6" fill="url(#manageGrad)" opacity="0.9" stroke="none"/>
+                      <path d="M26 28h26"/>
+                      <path d="M32 18v6M44 18v6"/>
+                      <rect x="32" y="32" width="4" height="4" fill="#ffffff" stroke="none"/>
+                      <rect x="40" y="32" width="4" height="4" fill="#ffffff" stroke="none"/>
+                      <rect x="32" y="40" width="4" height="4" fill="#ffffff" stroke="none"/>
+                      <rect x="40" y="40" width="4" height="4" fill="#ffffff" stroke="none"/>
+                    </g>
+                    <path class="cal-check" d="M22 40l12 12 20-26" stroke="url(#manageGrad)" stroke-width="4.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </svg>
+              </div>
+              <h3>2. Manage</h3>
+            </div>
+            <p>We manage repeat scripts and timing to align with clinical advice and patient needs.</p>
+          </div>
+          <div class="card card--deliver">
+            <div class="card__header">
+              <div class="card__icon" aria-hidden="true">
+                <svg viewBox="0 0 88 88" focusable="false">
+                  <defs>
+                    <linearGradient id="deliverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.95"/>
+                      <stop offset="100%" stop-color="var(--accent-2)" stop-opacity="0.95"/>
+                    </linearGradient>
+                    <linearGradient id="vanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="1"/>
+                      <stop offset="100%" stop-color="var(--accent-2)" stop-opacity="1"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Removed inner overlay for a single background tone -->
+                  <g transform="translate(4 4)">
+                    <g class="van" fill="url(#vanGrad)" stroke="none">
+                      <rect x="12" y="34" width="60" height="30" rx="10"/>
+                      <rect x="60" y="40" width="10" height="8" rx="2" fill="#d7e3ef"/>
+                      <circle cx="22" cy="68" r="5.2" fill="#222"/>
+                      <circle cx="22" cy="68" r="2.5" fill="#d7e3ef"/>
+                      <circle cx="62" cy="68" r="5.2" fill="#222"/>
+                      <circle cx="62" cy="68" r="2.5" fill="#d7e3ef"/>
+                    </g>
+                    <g class="cold" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(56 -2)">
+                      <g>
+                        <line x1="0" y1="6" x2="10" y2="6"/>
+                        <line x1="5" y1="1" x2="5" y2="11"/>
+                        <line x1="1.5" y1="2" x2="8.5" y2="10"/>
+                        <line x1="8.5" y1="2" x2="1.5" y2="10"/>
+                        <circle cx="5" cy="6" r="2" fill="var(--accent-2)" stroke="none"/>
+                      </g>
+                      <g transform="translate(0 18)">
+                        <rect x="0" y="0" width="12" height="20" rx="5" fill="#fff" stroke="var(--accent)"/>
+                        <line x1="6" y1="3" x2="6" y2="15" />
+                        <circle cx="6" cy="15" r="3.4" fill="var(--accent-2)" stroke="none"/>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <h3>3. Deliver</h3>
+            </div>
+            <p>We deliver on time, with validated cold-chain where required and clear handover at the arranged place.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="delivery">
+      <div class="container">
+        <div class="section__head">
+          <h2>Delivery & Cold-Chain</h2>
+          <p class="lead">Validated cold-chain packaging and handling to protect medicine integrity throughout the journey.</p>
+        </div>
+        <div class="card">
+          <p id="cold-chain">Read about our cold-chain packaging <a href="/cold-chain-packaging" aria-label="Read about our cold-chain packaging">here</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="grid-2">
+          <div>
+            <h2>About Inservio Home</h2>
+            <p>Inservio Home is a family owned and operated Australian business. We are committed to supporting patients, families, clinicians, and pharmacies with an accessible, patient-centred service.</p>
+          </div>
+          <aside id="contact" class="card" aria-label="Contact">
+            <h3>Get in touch</h3>
+            <p>If you'd like to learn more about our services or discuss how we can help, please reach out.</p>
+            <p><a class="button" href="mailto:info@example.com?subject=Enquiry%20about%20Inservio%20Home" aria-label="Email Inservio Home">Email us</a></p>
+            <p class="lead" style="font-size: .95rem; color: var(--muted);">(Replace with your preferred contact details.)</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer role="contentinfo">
     <div class="container footer-grid">
-      <div class="legal">©2024 by Inservio Home Pty Ltd. Proudly created with SquareSpace.com</div>
+      <div class="legal"></div>
       <div class="links">
         <a href="/privacy-policy.html">Privacy Policy</a>
       </div>
     </div>
   </footer>
+</body>
+</html>
+
 </body>
 </html>
